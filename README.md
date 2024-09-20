@@ -1,71 +1,33 @@
-# Getting Started with Create React App
+# Blog React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bem-vindo ao projeto **Blog React**, uma aplicação desenvolvida com o objetivo de permitir a criação, interação e visualização de postagens de maneira dinâmica e intuitiva. Este projeto foi construído utilizando **React**, oferecendo uma interface moderna e responsiva para que os usuários possam criar postagens, curtir, comentar e expandir o conteúdo para uma leitura completa.
 
-## Available Scripts
+## Funcionalidades Principais
 
-In the project directory, you can run:
+- **Criação de Postagens:** Os usuários podem criar novas postagens, inserindo um título, conteúdo e uma imagem, proporcionando uma experiência completa de publicação.
+- **Interação com Postagens:** Cada postagem pode ser curtida e comentada, incentivando a interação entre os usuários.
+- **Expansão de Conteúdo:** Quando o conteúdo de uma postagem excede 100 caracteres, o usuário pode clicar em "Leia Mais" para expandir o conteúdo completo em um modal.
+- **Gerenciamento de Postagens:** As postagens podem ser removidas pelos próprios usuários, permitindo controle sobre os conteúdos publicados.
 
-### `npm start`
+## Componentes do Projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+O projeto é estruturado em torno de componentes modulares para facilitar a escalabilidade e a manutenção. Abaixo estão os principais:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Container:** O componente que encapsula toda a estrutura do blog.
+- **ContenedorCartao:** Responsável por exibir as postagens em formato de cartão.
+- **ContenedorImagem:** Exibe as imagens associadas a cada postagem.
+- **ContenedorConteudo:** Agrupa o título, excerto e as interações (curtir, comentar).
+- **TituloPost:** Exibe o título da postagem de maneira destacada.
+- **ExcertoPost:** Exibe um resumo da postagem, limitando o conteúdo para visualização rápida.
+- **BotaoCurtir:** Permite que os usuários curtam uma postagem.
+- **EntradaComentario:** Um campo interativo onde os usuários podem inserir novos comentários.
+- **ListaComentarios:** Exibe os comentários deixados por outros usuários para cada postagem.
+- **Popup:** Modal que exibe o conteúdo completo de postagens longas, proporcionando uma experiência de leitura fluida.
+- **ContenedorInteracao:** Reúne todas as funcionalidades de interação (curtidas, comentários).
 
-### `npm test`
+## Tecnologias Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Miniblog-React
+- **React:** Biblioteca JavaScript amplamente utilizada para construção de interfaces de usuário.
+- **CSS Modules:** Utilizado para estilização dos componentes de forma modular e organizada, garantindo um design consistente e fácil manutenção.
