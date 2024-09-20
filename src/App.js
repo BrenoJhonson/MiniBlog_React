@@ -15,9 +15,12 @@ import IconePerfil from './components/IconePerfil';
 import TextoComentario from './components/TextoComentario';
 import BotaoLeiaMais from './components/BotaoLeiaMais';
 import TituloPagina from './components/TituloPagina';
-import Popup from './components/Popup'; // Importar o componente Popup
-import ContenedorInteracao from './components/ContenedorInteracao'; // Importar o componente ContenedorInteracao
-import BotaoComentar from './components/BotaoComentar'; // Importar o componente BotaoComentar
+import Popup from './components/Popup';
+import ContenedorInteracao from './components/ContenedorInteracao';
+import BotaoComentar from './components/BotaoComentar';
+
+// Imagem padrão
+const imagemPadrao = 'link-para-imagem-padrao.jpg'; // Substitua por um link válido
 
 class App extends Component {
   state = {
@@ -31,26 +34,51 @@ class App extends Component {
     curtidas: {},
     comentarios: {},
     entradaComentario: "",
+    erroTitulo: "",
+    erroImagem: ""
   };
 
   lidarMudanca = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  adicionarPostagem = () => {
-    const novaPostagem = {
-      titulo: this.state.entradaTitulo,
-      conteudo: this.state.entradaConteudo,
-      imagem: this.state.entradaImagem,
-      id: Date.now(),
-    };
+  // Função de validação da URL da imagem
+  validarURLImagem = (url) => {
+    const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    return regex.test(url);
+  };
 
-    if (this.state.entradaTitulo && this.state.entradaConteudo) {
+  adicionarPostagem = () => {
+    const { entradaTitulo, entradaConteudo, entradaImagem } = this.state;
+
+    // Validação do título (máximo 50 caracteres)
+    if (entradaTitulo.length > 50) {
+      this.setState({ erroTitulo: "O título não pode ter mais de 50 caracteres" });
+      return;
+    }
+
+    // Validação da URL da imagem
+    if (entradaImagem && !this.validarURLImagem(entradaImagem)) {
+      this.setState({ erroImagem: "URL de imagem inválida" });
+      return;
+    }
+
+    // Se o campo de título e conteúdo estiverem preenchidos, adicionar postagem
+    if (entradaTitulo && entradaConteudo) {
+      const novaPostagem = {
+        titulo: entradaTitulo,
+        conteudo: entradaConteudo,
+        imagem: entradaImagem || imagemPadrao, // Se não houver imagem, usa a padrão
+        id: Date.now(),
+      };
+
       this.setState((prevState) => ({
         postagens: [...prevState.postagens, novaPostagem],
         entradaTitulo: "",
         entradaConteudo: "",
         entradaImagem: "",
+        erroTitulo: "",
+        erroImagem: ""
       }));
     }
   };
@@ -104,6 +132,7 @@ class App extends Component {
             value={this.state.entradaTitulo}
             onChange={this.lidarMudanca}
           />
+          {this.state.erroTitulo && <p style={{ color: "red" }}>{this.state.erroTitulo}</p>}
           <textarea
             name="entradaConteudo"
             placeholder="Conteúdo"
@@ -117,12 +146,13 @@ class App extends Component {
             value={this.state.entradaImagem}
             onChange={this.lidarMudanca}
           />
+          {this.state.erroImagem && <p style={{ color: "red" }}>{this.state.erroImagem}</p>}
           <button onClick={this.adicionarPostagem}>Adicionar Postagem</button>
         </ContenedorFormulario>
 
         {this.state.postagens.map((post) => (
           <ContenedorCartao key={post.id}>
-            <ContenedorImagem src={post.imagem} />
+            <ContenedorImagem src={post.imagem || imagemPadrao} />
             <ContenedorConteudo>
               <TituloPost>{post.titulo}</TituloPost>
               <ExcertoPost>
