@@ -18,9 +18,9 @@ import TituloPagina from './components/TituloPagina';
 import Popup from './components/Popup';
 import ContenedorInteracao from './components/ContenedorInteracao';
 import BotaoComentar from './components/BotaoComentar';
+import BotaoRemover from './components/BotaoRemover'; // Importar o novo Botão Remover
 
-// Imagem padrão
-const imagemPadrao = 'link-para-imagem-padrao.jpg'; // Substitua por um link válido
+const imagemPadrao = 'https://profitec.uema.br/wp-content/uploads/2023/06/Analise-e-Des_de_Sistemas-300x300.jpg'; // Substitua por um link válido
 
 class App extends Component {
   state = {
@@ -33,7 +33,7 @@ class App extends Component {
     modalAberta: false,
     curtidas: {},
     comentarios: {},
-    entradaComentario: "",
+    entradaComentario: {}, 
     erroTitulo: "",
     erroImagem: ""
   };
@@ -42,7 +42,16 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // Função de validação da URL da imagem
+  lidarMudancaComentario = (e, id) => {
+    const { value } = e.target;
+    this.setState((prevState) => ({
+      entradaComentario: {
+        ...prevState.entradaComentario,
+        [id]: value
+      }
+    }));
+  };
+
   validarURLImagem = (url) => {
     const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
     return regex.test(url);
@@ -51,24 +60,21 @@ class App extends Component {
   adicionarPostagem = () => {
     const { entradaTitulo, entradaConteudo, entradaImagem } = this.state;
 
-    // Validação do título (máximo 50 caracteres)
     if (entradaTitulo.length > 50) {
       this.setState({ erroTitulo: "O título não pode ter mais de 50 caracteres" });
       return;
     }
 
-    // Validação da URL da imagem
     if (entradaImagem && !this.validarURLImagem(entradaImagem)) {
       this.setState({ erroImagem: "URL de imagem inválida" });
       return;
     }
 
-    // Se o campo de título e conteúdo estiverem preenchidos, adicionar postagem
     if (entradaTitulo && entradaConteudo) {
       const novaPostagem = {
         titulo: entradaTitulo,
         conteudo: entradaConteudo,
-        imagem: entradaImagem || imagemPadrao, // Se não houver imagem, usa a padrão
+        imagem: entradaImagem || imagemPadrao,
         id: Date.now(),
       };
 
@@ -107,13 +113,18 @@ class App extends Component {
   };
 
   adicionarComentario = (id) => {
-    if (this.state.entradaComentario.trim() !== "") {
+    const comentario = this.state.entradaComentario[id];
+
+    if (comentario && comentario.trim() !== "") {
       this.setState((prevState) => ({
         comentarios: {
           ...prevState.comentarios,
-          [id]: [...(prevState.comentarios[id] || []), this.state.entradaComentario],
+          [id]: [...(prevState.comentarios[id] || []), comentario],
         },
-        entradaComentario: "",
+        entradaComentario: {
+          ...prevState.entradaComentario,
+          [id]: ""
+        }
       }));
     }
   };
@@ -166,7 +177,8 @@ class App extends Component {
                 )}
               </ExcertoPost>
               <GrupoBotoes>
-                <button onClick={() => this.removerPostagem(post.id)}>Remover</button>
+                {/* Usando o novo Botão Remover */}
+                <BotaoRemover onClick={() => this.removerPostagem(post.id)}>Remover</BotaoRemover>
               </GrupoBotoes>
 
               <ContenedorInteracao>
@@ -180,8 +192,8 @@ class App extends Component {
                 <EntradaComentario
                   type="text"
                   placeholder="Comente aqui"
-                  value={this.state.entradaComentario}
-                  onChange={this.lidarMudanca}
+                  value={this.state.entradaComentario[post.id] || ""}
+                  onChange={(e) => this.lidarMudancaComentario(e, post.id)}
                 />
                 <BotaoComentar onClick={() => this.adicionarComentario(post.id)}>
                   Comentar
