@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { keyframes } from 'styled-components';
 
-// Define a animação que muda as cores do texto
 const changeColor = keyframes`
     0% {
         color: Black;
@@ -24,15 +23,15 @@ const Container = styled.div`
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    width: 100%;         /* Largura total */
-    max-width: 1200px;   /* Largura máxima */
-    margin: 0 auto;      /* Centraliza horizontalmente */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 `;
 
 const Title = styled.h1`
     font-size: 32px;
     font-family: Arial, Helvetica, sans-serif;
-    animation: ${changeColor} 4s infinite; /* Animação de mudança de cores */
+    animation: ${changeColor} 4s infinite;
 `;
 
 const GifImage = styled.img`
