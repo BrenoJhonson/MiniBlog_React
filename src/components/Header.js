@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-    color: #999;
+    color: White;
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
 `;
