@@ -1,21 +1,42 @@
 import React from "react";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+// Define a animação que muda as cores do texto
+const changeColor = keyframes`
+    0% {
+        color: Black;
+    }
+    25% {
+        color: Red;
+    }
+    50% {
+        color: Blue;
+    }
+    75% {
+        color: Green;
+    }
+    100% {
+        color: Black;
+    }
+`;
 
 const Container = styled.div`
-    background-color: black;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
+    width: 100%;         /* Largura total */
+    max-width: 1200px;   /* Largura máxima */
+    margin: 0 auto;      /* Centraliza horizontalmente */
 `;
 
 const Title = styled.h1`
-    color: White;
-    font-size: 24px;
+    font-size: 32px;
     font-family: Arial, Helvetica, sans-serif;
+    animation: ${changeColor} 4s infinite; /* Animação de mudança de cores */
 `;
 
 const GifImage = styled.img`
-    width: 150px;
+    width: 200px;
     height: auto;
     margin-bottom: 20px;
 `;
