@@ -49,7 +49,7 @@ const Title = styled.h1`
 `;
 
 const GifImage = styled.img`
-    width: 200px;
+    width: 350px;
     height: auto;
     margin-bottom: 20px;
 
@@ -66,7 +66,7 @@ class Header extends React.Component {
     render() {
         return (
             <Container>
-                <GifImage src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifMUfbC0dYEIiRSPkFd8cG_XUZBzOqruEQpMeo0EoondlCMWGeHPYttkCD3e62Q5o_i5991wqAvTr3QUIVWPvYWXs5Kf0zmy0_iISzTWyH4VVMjrx0Ku6HpIyH1Y5mw0OZzZmg3S03ngiQ/s320/Gifs+animados+%25C3%2581rvore+14.gif" />
+                <GifImage src="https://i.pinimg.com/originals/02/c9/74/02c974b31ed72a2850ec2bac3cadf38a.gif"/>
                 <Title>{this.state.nome}</Title>
             </Container>
         );
