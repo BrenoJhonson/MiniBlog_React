@@ -2,17 +2,15 @@ import React from "react";
 import './PostForm.css';
 import '../App.css';
 
-
-
 class PostForm extends React.Component {
   state = {
-    titulo: "",
-    conteudo: "",
-    url: "",
-    post: [],
-    showPopup: false,
-    currentPost: null,
-    comentario: "",
+    titulo: "",         // Título da postagem
+    conteudo: "",       // Conteúdo da postagem
+    url: "",            // URL da imagem (opcional)
+    post: [],           // Lista de postagens
+    showPopup: false,   // Controle de exibição do modal
+    currentPost: null,  // Post atual no modal
+    comentario: "",     // Comentário a ser adicionado
   };
 
   onChangeTitulo = (event) => {
@@ -33,15 +31,13 @@ class PostForm extends React.Component {
 
   adicionarPostagem = (event) => {
     event.preventDefault();
-
     const { titulo, conteudo, url, post } = this.state;
 
-    // Verifica se título e conteúdo estão preenchidos
     if (titulo && conteudo) {
       const novaPostagem = { titulo, conteudo, url, comentarios: [], estrelas: 0 };
       this.setState({
-        post: [...post, novaPostagem],
-        titulo: "",
+        post: [...post, novaPostagem], // Atualiza a lista de postagens
+        titulo: "",                    // Reseta os campos do formulário
         conteudo: "",
         url: "",
       });
@@ -60,7 +56,7 @@ class PostForm extends React.Component {
 
   excluirPostagem = (index) => {
     const { post } = this.state;
-    const novasPostagens = post.filter((_, i) => i !== index);
+    const novasPostagens = post.filter((_, i) => i !== index); // Filtra a postagem excluída
     this.setState({ post: novasPostagens });
   };
 
@@ -70,7 +66,7 @@ class PostForm extends React.Component {
     if (comentario) {
       const novasPostagens = post.map((p, i) => {
         if (i === index) {
-          return { ...p, comentarios: [...p.comentarios, comentario] };
+          return { ...p, comentarios: [...p.comentarios, comentario] }; // Adiciona comentário à postagem específica
         }
         return p;
       });
@@ -85,7 +81,7 @@ class PostForm extends React.Component {
     const { post } = this.state;
     const novasPostagens = post.map((p, i) => {
       if (i === index) {
-        return { ...p, estrelas };
+        return { ...p, estrelas }; // Atualiza a avaliação da postagem
       }
       return p;
     });
@@ -120,6 +116,7 @@ class PostForm extends React.Component {
             name="url"
             onChange={this.onChangeUrl}
             value={url}
+            placeholder="Opcional"
           />
 
           <div className="form-buttons">
@@ -137,7 +134,7 @@ class PostForm extends React.Component {
               <button onClick={() => this.lerPostagem(p)}>Leia Mais</button>
               <button onClick={() => this.excluirPostagem(index)}>Excluir</button>
 
-              {/* Estrelas para avaliação */}
+              {/* Avaliação com estrelas */}
               <div>
                 {Array.from({ length: 5 }, (_, i) => (
                   <span
@@ -150,7 +147,7 @@ class PostForm extends React.Component {
                 ))}
               </div>
 
-              {/* Comentários */}
+              {/* Seção de comentários */}
               <div>
                 <input
                   type="text"
