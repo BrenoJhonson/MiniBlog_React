@@ -22,7 +22,7 @@ const GifImage = styled.img`
 
 class Header extends React.Component {
     state = {
-        nome: "Mini Blog de suas aventuras na natureza"
+        nome: "Mini Blog de Aventuras na Natureza"
     };
 
     render() {
